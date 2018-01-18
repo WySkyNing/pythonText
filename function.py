@@ -94,7 +94,7 @@ print(add_end())
 print(add_end())
 
 
-#可变参数
+#可变参数允许你传入 0 个或任意个参数，这些可变参数在函数调用时自动组装成一个 tuple
 def calc(*number):
 	for x in number:
 		print(x)
@@ -102,3 +102,32 @@ def calc(*number):
 
 calc("可变参数:传2个",1,2)
 calc("可变参数:传3个",1,2,3)
+
+
+#关键字参数允许你传入 - 个或任意个 ‘含参数名的参数‘ ，这些关键字在函数内部自动组装成一个 dict
+def person(name,age,**kw):
+	print("name: ",name, "  age: ",age ,"order: " ,kw)
+
+print("调用带关键字的参数方法： ")
+person("tom","22",city= "beiJing")
+
+‘’‘
+注意kw获得的dict是extra的一份拷贝，对kw的改动不会影响到函数外的extra
+’‘’
+_dict = {"city" : "beiJing","job" : "work"}
+print("调用带关键字的参数方法,直接传入一个 dict：  ")
+person("tom","22",**_dict)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
