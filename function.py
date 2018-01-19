@@ -94,7 +94,7 @@ print(add_end())
 print(add_end())
 
 
-#可变参数允许你传入 0 个或任意个参数，这些可变参数在函数调用时自动组装成一个 tuple
+#可变参数 允许你传入 0 个或任意个参数，这些可变参数在函数调用时自动组装成一个 tuple
 def calc(*number):
 	for x in number:
 		print(x)
@@ -104,28 +104,65 @@ calc("可变参数:传2个",1,2)
 calc("可变参数:传3个",1,2,3)
 
 
-#关键字参数允许你传入 - 个或任意个 ‘含参数名的参数‘ ，这些关键字在函数内部自动组装成一个 dict
+#关键字参 数允许你传入 - 个或任意个 ‘含参数名的参数‘ ，这些关键字在函数内部自动组装成一个 dict
 def person(name,age,**kw):
 	print("name: ",name, "  age: ",age ,"order: " ,kw)
 
 print("调用带关键字的参数方法： ")
 person("tom","22",city= "beiJing")
 
-‘’‘
-注意kw获得的dict是extra的一份拷贝，对kw的改动不会影响到函数外的extra
-’‘’
+
+#注意kw获得的dict是extra的一份拷贝，对kw的改动不会影响到函数外的extra
+
 _dict = {"city" : "beiJing","job" : "work"}
 print("调用带关键字的参数方法,直接传入一个 dict：  ")
 person("tom","22",**_dict)
 
 
+#命名关键字参数 只接收city和job作为关键字参数-格式是 *, 后面有个逗号,关键字参数是 **
+#命名关键字参数必须传入参数名,否则报错
+def person(name,age,*,city,job):
+	print(name,age,city,job)
+
+print("\n调用命名关键字参数:")
+person("jack",22,city ="HaiCheng",job = "Code")
+
+
+#如果参数中已经有了一个可变参数,后面的命名关键字参数就不需要再跟一个 * 号了
+#命名关键字参数也可以设置默认值
+def person(name,age,*args,city,job = "无业"):
+	print(name,age,args,city,job)
+
+person("ZhangSan",20,"a","b","c",city = "ShangHai")
 
 
 
+def f1(c = 0,a):
+	print(c,a)
+f1(2,1)
 
 
+"""
+默认参数一定要用不可变对象，如果是可变对象，程序运行时会有逻辑错误！
 
+要注意定义可变参数和关键字参数的语法：
 
+*args是可变参数，args接收的是一个tuple；
+
+**kw是关键字参数，kw接收的是一个dict。
+
+以及调用函数时如何传入可变参数和关键字参数的语法：
+
+可变参数既可以直接传入：func(1, 2, 3)，又可以先组装list或tuple，再通过*args传入：func(*(1, 2, 3))；
+
+关键字参数既可以直接传入：func(a=1, b=2)，又可以先组装dict，再通过**kw传入：func(**{'a': 1, 'b': 2})。
+
+使用*args和**kw是Python的习惯写法，当然也可以用其他参数名，但最好使用习惯用法。
+
+命名的关键字参数是为了限制调用者可以传入的参数名，同时可以提供默认值。
+
+定义命名的关键字参数在没有可变参数的情况下不要忘了写分隔符*，否则定义的将是位置参数。
+"""
 
 
 
