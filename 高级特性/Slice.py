@@ -107,4 +107,27 @@ _generator1 = (x for x in range(5))
 print("输出生成器中的值(迭代法): ")
 for x in _generator1:
 	print(x)
+
+
+
+#generator和函数的执行流程不一样。
+#函数是顺序执行，遇到return语句或者最后一行函数语句就返回。
+#而变成generator的函数，在每次调用next()的时候执行，遇到yield语句返回，再次执行时从上次返回的yield语句处继续执行。
+print("\n自己创建生成器: ")
+def fib(max):
+
+	n ,a ,b = 0,0,1
+
+	while n < max:
+
+		yield b
+
+		a , b = b , a + b
+		n = n + 1
+
+	return "done"
+
+for x in fib(6):
+	print(x)
+		
 	
